@@ -1,5 +1,5 @@
 /*
-  Source code for this project is freely available at ___
+  Source code for this project is freely available at https://github.com/penguinscode/Quackhead
 */
 
 var duckDemoDiv, fileInput, tileHolder, duckTexture, addTeamButton;
