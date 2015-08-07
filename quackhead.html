@@ -1,0 +1,42 @@
+<!doctype html>
+<!--
+  Source code for this project is freely available at ___
+-->
+
+<html>
+<head>
+  <title>Quackhead - Duck Game Hat Pack Creation Tool</title>
+  <link href="flatui/css/vendor/bootstrap.min.css" rel="stylesheet">
+  <link href="flatui/css/flat-ui.css" rel="stylesheet">
+  <link rel="icon" type="image/png" href="icon.png" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/3.0.7/pixi.min.js"></script>
+  <script src="FileSaver.min.js"></script>
+  <script src="jszip.min.js"></script>
+  <script src="quackhead.js"></script>
+</head>
+<body>
+  <div style="margin-left: 25px">
+    <div style="margin-bottom: 5px">
+      <a href="instructions.html" target="_blank"><button type="button" class="btn btn-default" id="instructionsbutton">Instructions</button></a>
+      <button type="button" class="btn btn-default" id="addteambutton">Add Team</button>
+      <input type="file" id="fileInput" multiple accept="image/*" style="display:none">
+      <button type="button" class="btn btn-default" id="exportasmodpackbutton">Export as Modpack</button>
+    </div>
+    <div id="modexportbox" style="display: none;margin-bottom: 5px;background-color: #eff0f2;position: relative;border-radius:6px;box-sizing: border-box;width: 500px;padding: 15px 15px 15px 15px">
+      <input type="text" class="form-control" id="modnamebox" placeholder="Name"></input>
+      <input type="text" class="form-control" id="moddescbox" placeholder="Description"></input>
+      <input type="text" class="form-control" id="modauthorbox" placeholder="Author (or your username)"></input>
+      <input type="text" class="form-control" id="modverbox" placeholder="Version"></input>
+      <button type="button" class="btn btn-default" id="downloadmodpackbtn">Download Exported Modpack</button>
+    </div>
+    <div class="row" id="teamboxcontainer">
+      <div id="teambox" style="float: left;width: 405px;padding-right: 15px;padding-left: 15px;">
+        <div class="tile" style="width: 385px;height: 274px">
+          <input type="text" style="display: inline;width: calc(100% - 50px)" class="form-control" placeholder="Enter Team Name"></input>
+          <button type="button" class="btn btn-default" style="" id="downloadmodpackbtn">X</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
