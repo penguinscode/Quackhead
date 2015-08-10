@@ -162,7 +162,7 @@ function makeSafeName(name) {
   for (var i = 0, len = name.length; i < len; i++) {
     var c = name[i].toUpperCase();
     var x = c.charCodeAt(0);
-    if (x < 65 || x > 90) {
+    if ((x < 65 || x > 90) && (x < 48 || x > 57)) {
       if (x == 32) {
         nextUpper = true;
       }
@@ -252,8 +252,6 @@ function getIntBytes( x ){
 }
 
 function generateHatFile(team) {
-  // All values are Little Endian
-  // Generate IV (16 random bytes)
   var iv = generateIV();
   var xIV = toStr(iv);
   var encData = [];
@@ -264,19 +262,16 @@ function generateHatFile(team) {
   var imageBytes = fromStr(atob(dataURLToBase64(team.data)));
   encData = encData.concat(getIntBytes(imageBytes.length));
   encData = encData.concat(imageBytes);
-  // 128-bit blocks, Rijndael Encrypted Data:
-    // Long: 402965919293045L (magic number)
-    // Length-Prefixed String (team name, 1 byte prefix)
-    // png length in bytes (int32)
-    // png data (raw bytes)
-  var saveData = []
+  var saveData = [];
   var ivlen = iv.length;
   saveData = saveData.concat(getIntBytes(iv.length));
   saveData = saveData.concat(iv);
   saveData = saveData.concat(doEncrypt(encData, iv, key));
-  var uia = new Uint8Array(saveData);
+  return saveData;
+}
 
-  return new Blob([new Uint8Array(saveData)], {type: "application/octet-stream"});
+function blobbify(data, type) {
+  return new Blob([new Uint8Array(data)], {type: type});
 }
 
 function doEncrypt(message, iv, key) {
@@ -287,12 +282,23 @@ function doEncrypt(message, iv, key) {
 }
 
 function exportHatFiles() {
-  //TODO Export zip if more than 1 hat
-  teams.forEach(function(team) {
-    var hat = generateHatFile(team);
+  if (teams.length == 0) {
+    return;
+  } else if (teams.length == 1) {
+    var team = teams[0];
+    var hat = blobbify(generateHatFile(team), "application/octet-stream");
     var sName = makeSafeName(team.tile.children[0].children[0].value);
     saveAs(hat, sName + ".hat");
-  });
+  } else {
+    var zip = new JSZip();
+    teams.forEach(function(team) {
+      var hat = generateHatFile(team);
+      var sName = makeSafeName(team.tile.children[0].children[0].value);
+      zip.file(sName + ".hat", btoa(hat), {base64: true});
+    });
+    var zipDL = zip.generate({type:"blob"});
+    saveAs(zipDL, "hats.zip");
+  }
 }
 
 window.onload = init;
