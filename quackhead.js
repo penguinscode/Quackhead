@@ -290,17 +290,14 @@ function exportHatFiles() {
     var sName = makeSafeName(team.tile.children[0].children[0].value);
     saveAs(hat, sName + ".hat");
   } else {
-    // var zip = new JSZip();
+    var zip = new JSZip();
     teams.forEach(function(team) {
-      var hat = blobbify(generateHatFile(team), "application/octet-stream");
+      var hat = generateHatFile(team);
       var sName = makeSafeName(team.tile.children[0].children[0].value);
-      saveAs(hat, sName + ".hat");
-      /*var hat = generateHatFile(team);
-      var sName = makeSafeName(team.tile.children[0].children[0].value);
-      zip.file(sName + ".hat", btoa(hat), {base64: true}); */
+      zip.file(sName + ".hat", btoa(toStr(hat)), {base64: true});
     });
-    /* var zipDL = zip.generate({type:"blob"});
-    saveAs(zipDL, "hats.zip"); */
+    var zipDL = zip.generate({type:"blob"});
+    saveAs(zipDL, "hats.zip");
   }
 }
 
