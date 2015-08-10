@@ -12,6 +12,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/3.0.7/pixi.min.js"></script>
   <script src="FileSaver.min.js"></script>
   <script src="jszip.min.js"></script>
+  <script src="slowaes/cryptoHelpers.js"></script>
+  <script src="slowaes/jsHash.js"></script>
+  <script src="slowaes/aes.js"></script>
   <script src="quackhead.js"></script>
 </head>
 <body>
@@ -21,6 +24,7 @@
       <button type="button" class="btn btn-default" id="addteambutton">Add Team</button>
       <input type="file" id="fileInput" multiple accept="image/*" style="display:none">
       <button type="button" class="btn btn-default" id="exportasmodpackbutton">Export as Modpack</button>
+      <button type="button" class="btn btn-default" id="exportashatfilesbutton">Export as .hat files</button>
     </div>
     <div id="modexportbox" style="display: none;margin-bottom: 5px;background-color: #eff0f2;position: relative;border-radius:6px;box-sizing: border-box;width: 500px;padding: 15px 15px 15px 15px">
       <input type="text" class="form-control" id="modnamebox" placeholder="Name"></input>
