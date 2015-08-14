@@ -80,8 +80,8 @@ function handleDrop(evt) {
 
 function handleFiles(files) {
   for (var i = 0, f; f = files[i]; i++) {
-    if (f.size > 102400) {
-      errorMessage("'" + f.name + "' has a file size of over 100KiB, which probably isn't right.");
+    if (f.size > 7168) {
+      errorMessage("'" + f.name + "' has a file size of over 7KiB. If the total hat size exceeds 8KiB, things will break. This file has been skipped. Try opening and saving it using Paint.NET to reduce the file size. Also ensure it's a 32x32 or 64x32 png image.");
       continue;
     }
     var reader = new FileReader();
@@ -96,6 +96,7 @@ function handleFiles(files) {
 
 function errorMessage(errorText) {
   console.error(errorText);
+  document.getElementById("errorbox").style.display = "";
 }
 
 function createTile(tex, data) {
