@@ -13,6 +13,7 @@ var modPackData = {
 
 var key = fromStr(atob("8xaYIAH0em9hKg0CEw8t5g=="));
 var hatMagicNo = fromStr(atob("dd550H5uAQA="));
+var hatCapeMagicNo = fromStr(atob("4TKFml89AgA="));
 
 function init() {
   addTeamButton = document.getElementById("addteambutton");
@@ -256,7 +257,11 @@ function generateHatFile(team) {
   var iv = generateIV();
   var xIV = toStr(iv);
   var encData = [];
-  encData = encData.concat(hatMagicNo);
+  var useMagicNo = hatMagicNo;
+  if (team.texture.width == 96) {
+    useMagicNo = hatCapeMagicNo;
+  }
+  encData = encData.concat(useMagicNo);
   var teamBytes = fromStr(team.tile.children[0].children[0].value);
   encData = encData.concat([teamBytes.length]);
   encData = encData.concat(teamBytes);
