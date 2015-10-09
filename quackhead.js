@@ -106,7 +106,7 @@ function createTile(tex, data) {
   stage.scale.x = 5;
   stage.scale.y = 5;
   var renderer = new PIXI.CanvasRenderer(355, 195);
-  renderer.backgroundColor = 0xff00ff;
+  renderer.backgroundColor = 0xffffff;
   tile.children[0].appendChild(renderer.view);
   var duck = new PIXI.Sprite(duckTexture);
   var hatContaine, hatContainer = new PIXI.Container();
